@@ -19,6 +19,7 @@ A privacy-first Claude Usage-Ops companion for Claude Code. It combines a Rich l
   - [⚡ Modern Installation with uv (Recommended)](#-modern-installation-with-uv-recommended)
   - [📦 Installation with pip](#-installation-with-pip)
   - [🛠️ Other Package Managers](#️-other-package-managers)
+  - [🐧 Debian / Ubuntu Package](#-debian--ubuntu-package)
 - [📖 Usage](#-usage)
   - [Get Help](#get-help)
   - [Basic Usage](#basic-usage)
@@ -166,6 +167,46 @@ pip install claude-monitor
 
 # Run from anywhere
 claude-monitor  # or cmonitor, ccmonitor for short
+```
+
+
+### 🐧 Debian / Ubuntu Package
+
+Native `.deb` packages for **Debian Trixie** (and compatible Ubuntu releases) are
+published on the VitexSoftware APT repository.
+
+#### Add the repository and install
+
+```bash
+# 1. Add the signing key and sources file
+sudo curl -fsSL http://repo.vitexsoftware.com/KEY.gpg \
+  -o /usr/share/keyrings/vitexsoftware-archive-keyring.gpg
+
+echo "Types: deb
+URIs: http://repo.vitexsoftware.com/
+Suites: trixie
+Components: main
+Signed-By: /usr/share/keyrings/vitexsoftware-archive-keyring.gpg" \
+  | sudo tee /etc/apt/sources.list.d/vitexsoftware.sources
+
+# 2. Install
+sudo apt update
+sudo apt install claude-code-usage-monitor
+```
+
+#### What the package provides
+
+- All five command aliases installed to `/usr/bin`:
+  `claude-monitor`, `claude-code-monitor`, `ccmonitor`, `ccm`, `cmonitor`
+- Man pages for every alias (`man claude-monitor`)
+- AppStream metadata for software-centre integration
+- All Python dependencies pulled in automatically via `apt`
+
+#### Direct .deb download (no repository needed)
+
+```bash
+wget https://repo.vitexsoftware.com/pool/main/c/claude-code-usage-monitor/claude-code-usage-monitor_3.1.0-1.3~trixie_all.deb
+sudo apt install ./claude-code-usage-monitor_3.1.0-1.3~trixie_all.deb
 ```
 
 
