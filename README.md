@@ -176,26 +176,19 @@ claude-monitor  # or cmonitor, ccmonitor for short
 
 ### 🐧 Debian / Ubuntu Package
 
-Native `.deb` packages for **Debian Trixie** (and compatible Ubuntu releases) are
-published on the VitexSoftware APT repository.
+Native `.deb` packaging for **Debian Trixie** (and compatible derivatives) is
+included in this repository under the `debian/` directory.
 
-#### Add the repository and install
+#### Build from source
 
 ```bash
-# 1. Add the signing key and sources file
-sudo curl -fsSL http://repo.vitexsoftware.com/KEY.gpg \
-  -o /usr/share/keyrings/vitexsoftware-archive-keyring.gpg
-
-echo "Types: deb
-URIs: http://repo.vitexsoftware.com/
-Suites: trixie
-Components: main
-Signed-By: /usr/share/keyrings/vitexsoftware-archive-keyring.gpg" \
-  | sudo tee /etc/apt/sources.list.d/vitexsoftware.sources
-
-# 2. Install
-sudo apt update
-sudo apt install claude-code-usage-monitor
+git clone https://github.com/Maciek-roboblog/Claude-Code-Usage-Monitor.git
+cd Claude-Code-Usage-Monitor
+sudo apt install debhelper-compat dh-python pybuild-plugin-pyproject \
+  python3-all python3-setuptools python3-rich python3-numpy \
+  python3-pydantic python3-pydantic-settings python3-yaml python3-pytz
+dpkg-buildpackage -us -uc -b
+sudo apt install ../claude-code-usage-monitor_*.deb
 ```
 
 #### What the package provides
@@ -205,13 +198,6 @@ sudo apt install claude-code-usage-monitor
 - Man pages for every alias (`man claude-monitor`)
 - AppStream metadata for software-centre integration
 - All Python dependencies pulled in automatically via `apt`
-
-#### Direct .deb download (no repository needed)
-
-```bash
-wget https://repo.vitexsoftware.com/pool/main/c/claude-code-usage-monitor/claude-code-usage-monitor_3.1.0-1.3~trixie_all.deb
-sudo apt install ./claude-code-usage-monitor_3.1.0-1.3~trixie_all.deb
-```
 
 
 ## 📖 Usage
